@@ -1,0 +1,22 @@
+@space-prefix-cls: ~'@{cz-prefix}-space';
+
+.@{space-prefix-cls} {
+  display: flex;
+  &-vertical {
+    flex-direction: column;
+  }
+  &-align {
+    &-center {
+      align-items: center;
+    }
+    &-start {
+      align-items: flex-start;
+    }
+    &-end {
+      align-items: flex-end;
+    }
+    &-baseline {
+      align-items: baseline;
+    }
+  }
+}

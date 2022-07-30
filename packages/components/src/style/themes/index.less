@@ -1,0 +1,145 @@
+@import '../color/index.less';
+// 样式前缀
+@cz-prefix: cz;
+
+// -------- Colors -----------
+@primary-color: #1890ff;
+@white: #fff;
+@black: #000;
+@text-color: fade(@black, 85%);
+@component-background: #fff;
+@background-color-base: hsv(0, 0, 96%); // Default grey background color
+@heading-color: fade(@black, 85%);
+@text-color-secondary: fade(@black, 45%);
+@icon-color-hover: fade(@black, 75%);
+
+@shadow-2: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08),
+  0 9px 28px 8px rgba(0, 0, 0, 0.05);
+@shadow-color: rgba(0, 0, 0, 0.45);
+// ------- height-------------
+@height-base: 32px;
+@height-lg: 40px;
+@height-sm: 24px;
+
+@zindex-popup-close: 10;
+@zindex-modal-mask: 1000;
+@animation-duration-slow: 0.3s; // Modal
+
+// vertical margins
+@margin-lg: 24px; // containers
+@margin-md: 16px; // small containers and buttons
+@margin-sm: 12px; // Form controls and items
+@margin-xs: 8px; // small items
+@margin-xss: 4px; // more small
+
+// vertical paddings
+@padding-lg: 24px; // containers
+@padding-md: 16px; // small containers and buttons
+@padding-sm: 12px; // Form controls and items
+@padding-xs: 8px; // small items
+@padding-xss: 4px; // more small
+
+// ------ border ------
+@border-width-base: 1px;
+@border-style-base: solid;
+@border-radius-base: 2px;
+@border-color-base: hsv(0, 0, 85%);
+@border-color-split: hsv(0, 0, 94%); // split border inside a component
+
+// -------fontSize-----
+@font-size-sm: 12px;
+@font-size-base: 14px;
+@font-size-lg: 16px;
+
+@line-height-base: 1.5715;
+
+// Medium screen / desktop
+@screen-md: 768px;
+@screen-md-min: @screen-md;
+@screen-sm-max: (@screen-md-min - 1px);
+// Disabled states
+@disabled-color: fade(#000, 25%);
+@disabled-bg: @background-color-base;
+
+// ------ Button -------
+@btn-font-weight: 400;
+@btn-border-radius-base: @border-radius-base;
+@btn-border-width: @border-width-base;
+@btn-border-style: @border-style-base;
+
+@btn-primary-color: #fff;
+@btn-primary-bg: @primary-color;
+
+@btn-default-color: @text-color;
+@btn-default-bg: @component-background;
+@btn-default-border: @border-color-base;
+
+@btn-font-size-lg: @font-size-lg;
+@btn-font-size-sm: @font-size-base;
+
+// ------ Avatar ------
+@avatar-size-sm: 24px;
+@avatar-size-lg: 40px;
+@avatar-size: 32px;
+
+@avatar-font-size-lg: @font-size-lg;
+@avatar-font-size-sm: @font-size-base;
+
+@avatar-border-radius-base: @border-radius-base;
+@avatar-default-color: @text-color;
+
+// ------Tag ------
+@tag-default-background-color: #fafafa;
+@tag-border-radius-base: @border-radius-base;
+@tag-border-width: @border-width-base;
+@tag-border-style: @border-style-base;
+@tag-default-border: @border-color-base;
+@tag-font-size-base: @font-size-sm;
+
+@tag-margin-base: @margin-xs;
+@tag-padding-base: @padding-xs;
+@tag-line-height-base: 20px;
+// ------ Badge ------
+@badge-font-size-base: 12px;
+// @badge-font-size-sm:14px;
+
+@badge-size-base: 20px;
+@badge-size-sm: 14px;
+
+@badge-border-radius-base: 10px;
+@badge-border-radius-sm: 14px;
+
+@badge-default-backgroundColor: @red-base;
+
+// ------ Divider ------
+
+@divider-default-color: @text-color;
+
+//-------- Modal --------
+@modal-header-padding-vertical: @padding-md;
+@modal-header-padding-horizontal: @padding-lg;
+@modal-body-padding: @padding-lg;
+@zindex-modal: 1000;
+@modal-heading-color: @heading-color;
+@modal-header-title-font-size: @font-size-lg;
+@modal-header-title-line-height: 22px;
+@modal-content-bg: @component-background;
+@modal-header-padding: @modal-header-padding-vertical
+  @modal-header-padding-horizontal;
+@modal-header-bg: @component-background;
+@modal-header-border-width: @border-width-base;
+@modal-header-border-style: @border-style-base;
+@modal-header-border-color-split: @border-color-split;
+@modal-mask-bg: fade(@black, 45%);
+@modal-close-color: @text-color-secondary;
+@modal-header-close-size: 56px;
+// ------ Progress ------
+
+@progress-font-size-base: @font-size-base;
+@progress-primary-color-bg: @primary-color;
+@progress-height-bg: 8px;
+@progress-default-text-width: 2em;
+@progress-default-border-radius: 100px;
+@progress-primary-border-radius: 100px;
+
+@success-color: @green-base;

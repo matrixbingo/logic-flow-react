@@ -1,0 +1,16 @@
+0 silly argv {
+0 silly argv   _: [ 'clean' ],
+0 silly argv   y: true,
+0 silly argv   yes: true,
+0 silly argv   lernaVersion: '3.22.1',
+0 silly argv   '$0': 'node_modules\\lerna\\cli.js'
+0 silly argv }
+1 notice cli v3.22.1
+2 verbose rootPath E:\Work\github\matrixbingo\logic-flow-react
+3 info versioning independent
+4 error Error: Invalid package name "logic-flow-react/hooks": name can only contain URL-friendly characters
+4 error     at invalidPackageName (E:\Work\github\matrixbingo\logic-flow-react\node_modules\npm-package-arg\npa.js:86:15)
+4 error     at Result.setName (E:\Work\github\matrixbingo\logic-flow-react\node_modules\npm-package-arg\npa.js:121:11)
+4 error     at new Result (E:\Work\github\matrixbingo\logic-flow-react\node_modules\npm-package-arg\npa.js:111:23)
+4 error     at Function.resolve (E:\Work\github\matrixbingo\logic-flow-react\node_modules\npm-package-arg\npa.js:58:15)
+4 error     at new Package (E:\Work\github\matrixbingo\logic-flow-react\node_modules\@lerna\package\index.js:36:26)
