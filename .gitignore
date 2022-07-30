@@ -23,3 +23,17 @@
 .umi-production
 .umi-test
 .env.local
+
+/.vscode
+/.idea
+
+# misc
+.DS_Store
+npm-debug.log*
+yarn-error.log
+
+# visual studio code
+.history
+*.log
+functions/*
+.temp/**
