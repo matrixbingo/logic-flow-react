@@ -1,6 +1,6 @@
 {
   "name": "logic-flow-for-react",
-  "version": "0.0.1",
+  "version": "0.0.11",
   "scripts": {
     "bootstrap": "yarn clean && lerna bootstrap",
     "clean": "lerna clean -y",
@@ -45,5 +45,6 @@
     "lint-staged": "^10.0.7",
     "prettier": "^1.19.1",
     "yorkie": "^2.0.0"
-  }
+  },
+  "license": "MIT"
 }

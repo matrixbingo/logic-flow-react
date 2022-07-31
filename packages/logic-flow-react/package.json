@@ -1,18 +1,24 @@
 {
   "name": "logic-flow-react",
-  "version": "0.0.1",
+  "version": "0.0.13",
   "description": "logic-flow for react",
   "author": "Matrix",
   "homepage": "https://github.com/matrixbingo/logic-flow-react#readme",
   "license": "MIT",
-  "main": "src/index.js",
   "directories": {
     "src": "src",
     "test": "__tests__"
   },
   "files": [
-    "src"
+    "es", "lib"
   ],
+  "sideEffects": [
+    "es/**/style/*",
+    "lib/**/style/*",
+    "*.less"
+  ],
+  "main": "lib/index.js",
+  "module": "es/index.js",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"
@@ -28,6 +34,14 @@
   "bugs": {
     "url": "https://github.com/matrixbingo/logic-flow-react/issues"
   },
+  "browserslist": [
+    "> 0.5%",
+    "last 2 versions",
+    "Firefox ESR",
+    "not dead",
+    "IE 11",
+    "not IE 10"
+  ],
   "dependencies": {
     "@logicflow/core": "^1.1.22",
     "@logicflow/extension": "^1.1.22",
@@ -41,6 +55,10 @@
     "@types/react": "^16.14.2",
     "@types/react-dom": "^16.9.9",
     "father-build": "^1.19.1"
+  },
+  "peerDependencies": {
+    "react": ">=16.9.0",
+    "react-dom": ">=16.9.0"
   },
   "gitHead": "656a3238ee9001e359465936f41d45f9f2559b72"
 }
