@@ -8,4 +8,5 @@ export default defineConfig({
   outputPath: 'docs-dist',
   mode: 'site',
   navs: nav,
+  mfsu: {},
 });

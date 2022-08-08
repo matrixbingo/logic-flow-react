@@ -10,7 +10,8 @@
     "test": "__tests__"
   },
   "files": [
-    "es", "lib"
+    "es",
+    "lib"
   ],
   "sideEffects": [
     "es/**/style/*",
@@ -43,12 +44,9 @@
     "not IE 10"
   ],
   "dependencies": {
-    "@logicflow/core": "^1.1.22",
-    "@logicflow/extension": "^1.1.22",
     "@babel/runtime": "^7.14.0",
-    "classnames": "^2.2.6",
-    "rc-dialog": "^8.5.2",
-    "rc-util": "^5.12.2"
+    "@logicflow/core": "^1.1.22",
+    "@logicflow/extension": "^1.1.22"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.11",
@@ -57,8 +55,8 @@
     "father-build": "^1.19.1"
   },
   "peerDependencies": {
+    "antd": "^4.22.3",
     "react": ">=16.9.0",
     "react-dom": ">=16.9.0"
-  },
-  "gitHead": "656a3238ee9001e359465936f41d45f9f2559b72"
+  }
 }

@@ -1,0 +1,61 @@
+.rect-node-table-container {
+  padding: 10px;
+  box-sizing: border-box;
+}
+.rect-node-table-node {
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 30%);
+  overflow: hidden;
+}
+.rect-node-table-node::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 8px;
+  background: #d79b00;
+}
+.rect-node-table-node.rect-node-table-color-1::before {
+  background: #1890ff;
+}
+.rect-node-table-node.rect-node-table-color-2::before {
+  background: #fa8c16;
+}
+.rect-node-table-node.rect-node-table-color-3::before {
+  background: #7cb305;
+}
+.rect-node-table-node.rect-node-table-color-4::before {
+  background: #f8cecc;
+}
+.rect-node-table-name {
+  height: 28px;
+  text-align: center;
+  line-height: 28px;
+  font-size: 14px;
+}
+
+.rect-node-row {
+  display: flex;
+  flex-flow: row wrap;
+  min-width: 0;
+}
+
+.rect-node-col-6 {
+  display: block;
+  flex: 0 0 25%;
+  max-width: 25%;
+}
+
+.rect-node-col-18 {
+  display: block;
+  flex: 0 0 75%;
+  max-width: 75%;
+}
+
+.rect-node-col {
+  position: relative;
+  max-width: 100%;
+  min-height: 1px;
+}
