@@ -46,7 +46,8 @@
   "dependencies": {
     "@babel/runtime": "^7.14.0",
     "@logicflow/core": "^1.1.22",
-    "@logicflow/extension": "^1.1.22"
+    "@logicflow/extension": "^1.1.22",
+    "rc-resize-observer": "^1.2.0"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.11",

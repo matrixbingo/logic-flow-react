@@ -1,74 +1,56 @@
 /* eslint-disable react/react-in-jsx-scope */
 import LogicFlow from '@logicflow/core';
-import React from 'react';
+import React, { FC } from 'react';
 import { useEffect, useRef } from 'react';
 import '@logicflow/core/dist/style/index.css';
+import * as Options from '@logicflow/core/types/options';
 import rectNode from '../../shape/node/rectangle-flow';
-import appInit from '../../icons/app.svg';
+import { useUpdateEffect } from '../../hooks';
 
-const data = {
-  nodes: [
-    {
-      id: 1,
-      type: 'rect-node',
-      x: 350,
-      y: 100,
-      properties: {
-        name: '1',
-        status: 'init',
-        svgs: { init: appInit }
-      },
-    },
-    {
-      id: 2,
-      type: 'rect-node',
-      x: 200,
-      y: 300,
-      properties: {
-        name: '2',
-        status: 'init',
-        svgs: { init: appInit }
-      },
-    },
-    {
-      id: 3,
-      type: 'rect-node',
-      x: 450,
-      y: 300,
-      properties: {
-        name: '2',
-        status: 'init',
-        svgs: { init: appInit }
-      },
-    }
-  ],
-  edges: [
-    {
-      sourceNodeId: 1,
-      targetNodeId: 2,
-      type: 'line',
-    },
-    {
-      sourceNodeId: 1,
-      targetNodeId: 3,
-      type: 'line',
-    },
-  ],
-};
+export interface LogicFlowGraphProps {
+  instance?: React.Dispatch<React.SetStateAction<LogicFlow>>;
+  constructorOptions?: Omit<Options.Definition, 'container' | 'width' | 'height'>;
+  resize?: { width: number, height: number, heightOffset: number };
+  defaultGraphData?: any;
+}
 
-export default function LogicFlowGraph() {
+const LogicFlowGraph: FC<LogicFlowGraphProps> = (props) => {
+  const { instance, constructorOptions, resize, defaultGraphData } = props;
   const refContainer = useRef();
+  const logicFlow = useRef<LogicFlow>(null);
 
   useEffect(() => {
-    const lf = new LogicFlow({
+    logicFlow.current = new LogicFlow({
       container: refContainer.current,
       grid: true,
-      width: 1000,
-      height: 500,
+      width: resize.width,
+      height: resize.height,
+      ...constructorOptions
     });
-    lf.register(rectNode);
-    lf.render(data);
+    logicFlow.current.register(rectNode);
+    logicFlow.current.render(defaultGraphData);
+    instance?.(logicFlow.current);
   }, []);
+
+  useUpdateEffect(() => {
+    let width = logicFlow.current.graphModel.width;
+    let height = logicFlow.current.graphModel.height;
+    if(resize.width !== logicFlow.current.graphModel.width){
+      width = resize.width;
+    }
+    const toHeight = resize.height + resize.heightOffset;
+    if(toHeight != logicFlow.current.graphModel.height){
+      height = toHeight;
+    }
+    logicFlow.current.resize(width, height);
+  }, [resize.width, resize.height]);
 
   return <div className="App" ref={refContainer} />;
 }
+
+LogicFlowGraph.defaultProps = {
+  resize: { width: 1200, height: 600, heightOffset: -67 },
+  constructorOptions: { grid: true }
+}
+
+export default LogicFlowGraph;

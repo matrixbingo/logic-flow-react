@@ -48,6 +48,7 @@
     "lerna": "^3.22.1",
     "lint-staged": "^10.0.7",
     "prettier": "^1.19.1",
+    "rc-resize-observer": "^1.2.0",
     "yorkie": "^2.0.0"
   },
   "license": "MIT"
