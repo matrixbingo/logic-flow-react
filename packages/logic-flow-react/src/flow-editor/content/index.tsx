@@ -85,11 +85,14 @@ const App: React.FC = () =>{
       <Header className="site-layout-sub-header">
         <Menu theme='light' mode="horizontal" defaultSelectedKeys={['2']} items={items1}  style={{ height: 32 }}/>
       </Header>
+      <Layout>
       <RcResizeObserver onResize={({ width }) => debouncedWidth(width)}>
         <Content style={{ padding: 0 }}>
           <LogicFlowGraph defaultGraphData={data} instance={setInstance} resize={{ height, width, heightOffset: -35 }}/>
         </Content>
       </RcResizeObserver>
+      <Sider theme='light' width={300} >Sider</Sider>
+      </Layout>
     </Layout>
   </Layout>)
 };
