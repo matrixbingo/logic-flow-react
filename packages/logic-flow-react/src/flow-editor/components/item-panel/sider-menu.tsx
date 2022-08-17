@@ -3,9 +3,11 @@ import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/
 import { Menu } from 'antd';
 import type { MenuProps } from 'antd';
 import appInit from '../icons/app.svg';
+import { ItemType } from 'antd/lib/menu/hooks/useItems';
 
-export interface SideMenuProps extends Omit<MenuProps, 'onClick'> {
+export interface SideMenuProps extends Omit<MenuProps, 'onClick' | 'items'> {
   onClick?: (key: string) => void;
+  items?: ItemType[];
 }
 
 const items2: MenuProps['items'] = [UserOutlined, LaptopOutlined, NotificationOutlined].map(
@@ -28,31 +30,8 @@ const items2: MenuProps['items'] = [UserOutlined, LaptopOutlined, NotificationOu
   },
 );
 
-const createMenuItems = (): MenuProps['items'] => {
-  return [
-    {
-      key: 'key1',
-      label: 'subnav_key1',
 
-      children: [
-        {
-          key: 'subKey1',
-          label: 'option_subKey1',
-          icon: <img src={appInit} width={14} height={14} />,
-          style: { paddingLeft: 32 }
-        },
-        {
-          key: 'subKey2',
-          label: 'option_subKey2',
-          icon: React.createElement(UserOutlined),
-          style: { paddingLeft: 32 }
-        }
-      ]
-    }
-  ]
-}
-
-const SideMenu: FC<PropsWithChildren<SideMenuProps>> = ({onClick: inputOnClick, ...rest}) => {
+const SideMenu: FC<PropsWithChildren<SideMenuProps>> = ({onClick: inputOnClick, items, ...rest}) => {
 
   const onClick: MenuProps['onClick'] = ({ key }) => inputOnClick?.(key);
 
@@ -62,7 +41,7 @@ const SideMenu: FC<PropsWithChildren<SideMenuProps>> = ({onClick: inputOnClick, 
     defaultSelectedKeys={['1']}
     defaultOpenKeys={['sub1']}
     style={{ height: '100%' }}
-    items={createMenuItems()}
+    items={items}
     {...rest}
   />
 };
