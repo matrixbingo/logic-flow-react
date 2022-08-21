@@ -9,6 +9,7 @@
   border-radius: 4px;
   box-shadow: 0 1px 3px rgb(0 0 0 / 30%);
   overflow: hidden;
+  cursor: pointer;
 }
 .rect-node-table-node::before {
   content: "";
@@ -17,13 +18,13 @@
   height: 8px;
   background: #d79b00;
 }
-.rect-node-table-node.rect-node-table-color-1::before {
+.rect-node-table-node.rect-node-table-color-init::before {
   background: #1890ff;
 }
-.rect-node-table-node.rect-node-table-color-2::before {
+.rect-node-table-node.rect-node-table-color-pending::before {
   background: #fa8c16;
 }
-.rect-node-table-node.rect-node-table-color-3::before {
+.rect-node-table-node.rect-node-table-color-done::before {
   background: #7cb305;
 }
 .rect-node-table-node.rect-node-table-color-4::before {

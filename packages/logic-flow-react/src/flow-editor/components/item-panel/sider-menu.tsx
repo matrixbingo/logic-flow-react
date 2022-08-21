@@ -1,49 +1,55 @@
 import React, { FC, PropsWithChildren } from 'react';
-import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
 import type { MenuProps } from 'antd';
-import appInit from '../icons/app.svg';
+import appInit from '../../icons/app.svg';
 import { ItemType } from 'antd/lib/menu/hooks/useItems';
 
+type Children = ItemType & { label: any } & { key: string };
+type ItemTypeProps = ItemType & { children: Children[] };
+
 export interface SideMenuProps extends Omit<MenuProps, 'onClick' | 'items'> {
-  onClick?: (key: string) => void;
-  items?: ItemType[];
+  onClick?: (item: Children) => boolean;
+  items?: ItemTypeProps[];
+  instance?: string;
 }
 
-const items2: MenuProps['items'] = [UserOutlined, LaptopOutlined, NotificationOutlined].map(
-  (icon, index) => {
-    const key = String(index + 1);
+const addMouseDown = (items: ItemTypeProps[], startDrag: (item: Children) => void) => {
+  items && items.forEach(i => {
+    i.children && i.children.forEach(c => {
+      c.label = <span style={{ userSelect: 'none'}} onMouseDown={() => startDrag(c)}>{c.label}</span>
+    })
+  });
+  return items;
+};
 
-    return {
-      key: `sub${key}`,
-      icon: React.createElement(icon),
-      label: `subnav ${key}`,
+const SideMenu: FC<PropsWithChildren<SideMenuProps>> = ({onClick: inputOnClick, items, instance, ...rest}) => {
 
-      children: new Array(4).fill(null).map((_, j) => {
-        const subKey = index * 4 + j + 1;
-        return {
-          key: subKey,
-          label: `option${subKey}`,
-        };
-      }),
-    };
-  },
-);
-
-
-const SideMenu: FC<PropsWithChildren<SideMenuProps>> = ({onClick: inputOnClick, items, ...rest}) => {
-
-  const onClick: MenuProps['onClick'] = ({ key }) => inputOnClick?.(key);
+  const startDrag = (item: Children) => {
+    if(inputOnClick?.(item)){
+      window[instance].dnd.startDrag({
+        type: 'rect-node',
+        properties: {
+          name: '6',
+          status: 'init',
+          svgs: { init: appInit }
+        },
+      })
+    }
+  }
 
   return <Menu
     mode="inline"
-    onClick={onClick}
     defaultSelectedKeys={['1']}
     defaultOpenKeys={['sub1']}
     style={{ height: '100%' }}
-    items={items}
+    items={addMouseDown(items, startDrag)}
+    // onMouseDown={startDrag}
     {...rest}
   />
 };
+
+SideMenu.defaultProps =  {
+  onClick: (item: Children) => true
+}
 
 export default SideMenu;

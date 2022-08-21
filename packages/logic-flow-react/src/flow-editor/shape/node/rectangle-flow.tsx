@@ -1,14 +1,16 @@
 import { HtmlNodeModel, HtmlNode } from '@logicflow/core';
+import { Button } from 'antd';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { hasParenNode } from '../../util/validate';
 import './rectangle-flow.css';
-import appInit from '../../icons/app.svg';
 
-function Rectangle(props) {
+export function Rectangle(props) {
   const { name, status, svgs } = props;
+  const  className = "rect-node-table-node rect-node-row rect-node-table-color-" + status;
   return (
     <>
-      <div className="rect-node-table-node rect-node-table-color-1 rect-node-row">
+      <div className={className}>
         <div className="rect-node-col rect-node-col-6 rect-node-table-name">
         <img src={svgs[status]} width={32} height={32} />
         </div>
@@ -18,28 +20,51 @@ function Rectangle(props) {
   )
 }
 
-class RectangleModel extends HtmlNodeModel {
+const sourceRules = [
+  {
+    message: "只允许从下边的锚点连出",
+    validate: (sourceNode, targetNode, sourceAnchor, targetAnchor) => targetAnchor.type === "top"
+  },
+  {
+    message: "不能自连接",
+    validate: (sourceNode, targetNode, sourceAnchor, targetAnchor) => sourceNode.id !== targetNode.id
+  },
+  {
+    message: "一个节点只能被一个节点连接",
+    validate: (sourceNode, targetNode, sourceAnchor, targetAnchor) => {
+      const { nodes, edges } = targetNode.incoming;
+      return nodes?.length === 0;
+    }
+  },
+  {
+    message: "不能连接父节点",
+    validate: (sourceNode, targetNode, sourceAnchor, targetAnchor) => {
+      const { id : sourceId } = sourceNode;
+      const has = hasParenNode(sourceNode, targetNode);
+      return !has;
+    }
+  }
+];
+
+export class RectangleModel extends HtmlNodeModel {
   setAttributes() {
     this.text.editable = false;
     const width = 200;
     const height = 80;
     this.width = width;
     this.height = height;
-    // const targetRule = {
-    //   message: "只允许从下边的锚点连出",
-    //   validate: (sourceNode, targetNode, sourceAnchor, targetAnchor) => {
-    //     return sourceAnchor.type === "bottom";
-    //   }
-    // };
-    // this.targetRules.push(targetRule);
 
-    const sourceRule = {
-      message: "只允许从下边的锚点连出",
+    sourceRules.forEach(sourceRule => this.sourceRules.push(sourceRule));
+
+    const targetRule = {
+      message: "一个节点只能被一个节点连接",
       validate: (sourceNode, targetNode, sourceAnchor, targetAnchor) => {
-        return targetAnchor.type === "top";
+        const { nodes, edges } = targetNode.incoming;
+        window.console.log('nodes, edges --->', nodes, edges);
+        return nodes?.length === 1 && edges?.length === 1;
       }
-    };;
-    this.sourceRules.push(sourceRule);
+    };
+    //this.targetRules.push(targetRule)
   }
   getDefaultAnchor() {
     const { width, height, x, y, id } = this;
@@ -60,11 +85,12 @@ class RectangleModel extends HtmlNodeModel {
     ]
   }
 }
-class RectangleNode extends HtmlNode {
+
+export class RectangleNode extends HtmlNode {
   setHtml(rootEl: HTMLElement) {
     const { properties } = this.props.model;
     rootEl.setAttribute("class", "rect-node-table-container");
-    ReactDOM.render(<Rectangle name={properties.name} svgs={properties.svgs} status={properties.status} />, rootEl);
+    ReactDOM.render(<Rectangle {...properties} />, rootEl);
   }
 }
 

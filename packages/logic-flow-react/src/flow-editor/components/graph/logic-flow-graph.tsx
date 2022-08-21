@@ -3,19 +3,26 @@ import LogicFlow from '@logicflow/core';
 import React, { FC } from 'react';
 import { useEffect, useRef } from 'react';
 import '@logicflow/core/dist/style/index.css';
+import "@logicflow/extension/lib/style/index.css";
 import * as Options from '@logicflow/core/types/options';
-import rectNode from '../../shape/node/rectangle-flow';
 import { useUpdateEffect } from '../../hooks';
+import { initDefaultShortcut } from '../register/keyboard/shortcut';
+import { eventRegister } from '../register/event/event-register';
+import './logic-flow-graph.css';
+import { Menu } from '../../extension/menu';
+import { SelectionSelect } from '../../extension/selection-select';
 
 export interface LogicFlowGraphProps {
-  instance?: React.Dispatch<React.SetStateAction<LogicFlow>>;
+  instance?: string;
   constructorOptions?: Omit<Options.Definition, 'container' | 'width' | 'height'>;
   resize?: { width: number, height: number, heightOffset: number };
+  elements?: any[],
   defaultGraphData?: any;
+  event?: (type: string, args: any) => void;
 }
 
 const LogicFlowGraph: FC<LogicFlowGraphProps> = (props) => {
-  const { instance, constructorOptions, resize, defaultGraphData } = props;
+  const { instance, constructorOptions, resize, elements, defaultGraphData, event } = props;
   const refContainer = useRef();
   const logicFlow = useRef<LogicFlow>(null);
 
@@ -25,11 +32,21 @@ const LogicFlowGraph: FC<LogicFlowGraphProps> = (props) => {
       grid: true,
       width: resize.width,
       height: resize.height,
+      plugins: [Menu, SelectionSelect],
+      edgeType: 'line',
+      multipleSelectKey: "meta",
       ...constructorOptions
     });
-    logicFlow.current.register(rectNode);
+
+    initDefaultShortcut(logicFlow.current, logicFlow.current.graphModel);
+    eventRegister(logicFlow.current, event);
+    logicFlow.current.batchRegister(elements);
+    logicFlow.current.extension.selectionSelect.setSelectionSense(true, false);
     logicFlow.current.render(defaultGraphData);
-    instance?.(logicFlow.current);
+
+    if(instance){
+      window[instance] = logicFlow.current;
+    }
   }, []);
 
   useUpdateEffect(() => {
@@ -45,7 +62,7 @@ const LogicFlowGraph: FC<LogicFlowGraphProps> = (props) => {
     logicFlow.current.resize(width, height);
   }, [resize.width, resize.height]);
 
-  return <div className="App" ref={refContainer} />;
+  return <div className="logic-flow-graph" ref={refContainer} />;
 }
 
 LogicFlowGraph.defaultProps = {
