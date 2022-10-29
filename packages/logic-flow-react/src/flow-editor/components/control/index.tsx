@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Button, Space, SpaceProps, Tooltip } from 'antd';
 import { useCreation } from '../../hooks';
-import './index.css';
+import './index.less';
 
 const FitSvg = () => (
   <svg width="20" height="20" fill="currentColor" viewBox="0 0 1024 1024">
@@ -103,7 +103,7 @@ const Control: FC<ControlProps> = ({ instance, showKeys }) => {
 
   const items = useCreation(() => createControlItems(instance), [window[instance]]);
 
-  return <div className='control-div' style={{ padding: 0, position: 'absolute', zIndex:20, top: 0, height: 32, width: '100%' }}>
+  return <div className='logic-flow-react-control-div' style={{ padding: 0, position: 'absolute', zIndex:20, top: 0, height: 32, width: '100%' }}>
     {
       items.map( ({ key, title, onClick, icon }) => {
         if(showKeys.includes(key)){

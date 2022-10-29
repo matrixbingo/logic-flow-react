@@ -1,5 +1,5 @@
 import { RectangleModel, RectangleNode } from './rectangle-flow';
-import './rectangle-flow.css';
+import './rectangle-flow.less';
 
 class RootRectangleModel extends RectangleModel {
 

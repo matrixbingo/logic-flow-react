@@ -8,7 +8,7 @@ import * as Options from '@logicflow/core/types/options';
 import { useUpdateEffect } from '../../hooks';
 import { initDefaultShortcut } from '../register/keyboard/shortcut';
 import { eventRegister } from '../register/event/event-register';
-import './logic-flow-graph.css';
+import './logic-flow-graph.less';
 import { Menu } from '../../extension/menu';
 import { SelectionSelect } from '../../extension/selection-select';
 

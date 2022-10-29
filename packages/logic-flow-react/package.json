@@ -1,6 +1,6 @@
 {
   "name": "logic-flow-react",
-  "version": "0.0.1",
+  "version": "0.0.23",
   "description": "logic-flow for react",
   "author": "Matrix",
   "homepage": "https://github.com/matrixbingo/logic-flow-react#readme",
@@ -45,8 +45,8 @@
   ],
   "dependencies": {
     "@babel/runtime": "^7.14.0",
-    "@logicflow/core": "^1.1.22",
-    "@logicflow/extension": "^1.1.22",
+    "@logicflow/core": "^1.1.29",
+    "@logicflow/extension": "^1.1.29",
     "rc-resize-observer": "^1.2.0"
   },
   "devDependencies": {

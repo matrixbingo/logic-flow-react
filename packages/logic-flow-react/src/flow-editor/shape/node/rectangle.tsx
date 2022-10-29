@@ -1,8 +1,8 @@
 import { HtmlNodeModel, HtmlNode } from '@logicflow/core';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './uml.css';
-import './rectangle.css';
+import './uml.less';
+import './rectangle.less';
 
 function Rectangle(props) {
   return (

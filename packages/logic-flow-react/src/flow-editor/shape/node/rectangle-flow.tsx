@@ -3,7 +3,7 @@ import { Button } from 'antd';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { hasParenNode } from '../../util/validate';
-import './rectangle-flow.css';
+import './rectangle-flow.less';
 
 export function Rectangle(props) {
   const { name, status, svgs } = props;

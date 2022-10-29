@@ -5,12 +5,33 @@ import appInit from './icons/app.svg';
 import { Drawer, MenuProps } from 'antd';
 import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
 import LogicFlow from "@logicflow/core";
+import 'antd/dist/antd.css';
 
 declare global {  //设置全局属性
   interface Window {
     readonly lf: LogicFlow;
   }
 }
+
+const defaultGraphNode = {
+  subKey1: {
+    type: 'rect-node',
+    properties: {
+      name: '1',
+      status: '3',
+      svgs: { init: appInit }
+    },
+  },
+  subKey2: {
+    type: 'rect-node',
+    properties: {
+      name: '2',
+      status: '4',
+      svgs: { init: appInit }
+    },
+  },
+};
+
 
 const Demo: React.FC = () => {
 
@@ -142,7 +163,11 @@ const Demo: React.FC = () => {
 
   return (
     <>
-      <FlowEditor drawerProps={{ title: '111', width: '40%', onClose, visible }} itemPanel={ { items: createMenuItems(), onClick } } logicFlowGraph={{ defaultGraphData, elements: [rectNode, rootNode], constructorOptions: { keyboard: { enabled: true } }, event}} controlKeys={['zoom-out', 'zoom-in', 'reset', 'select']}>
+      <FlowEditor defaultGraphNode={defaultGraphNode}
+                  drawerProps={{ title: '111', width: '40%', onClose, visible }}
+                  itemPanel={ { items: createMenuItems() as any, onClick } }
+                  logicFlowGraph={{ defaultGraphData, elements: [rectNode, rootNode], constructorOptions: { keyboard: { enabled: true } }, event}}
+                  controlKeys={['zoom-out', 'zoom-in', 'reset', 'select']}>
         <div>
           <p>Some contents...</p>
           <p>Some contents...</p>

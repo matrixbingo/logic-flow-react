@@ -1,7 +1,6 @@
 import React, { FC, PropsWithChildren } from 'react';
 import { Menu } from 'antd';
 import type { MenuProps } from 'antd';
-import appInit from '../../icons/app.svg';
 import { ItemType } from 'antd/lib/menu/hooks/useItems';
 
 type Children = ItemType & { label: any } & { key: string };
@@ -11,6 +10,7 @@ export interface SideMenuProps extends Omit<MenuProps, 'onClick' | 'items'> {
   onClick?: (item: Children) => boolean;
   items?: ItemTypeProps[];
   instance?: string;
+  defaultGraphNode?: Record<string, any>;
 }
 
 const addMouseDown = (items: ItemTypeProps[], startDrag: (item: Children) => void) => {
@@ -22,18 +22,13 @@ const addMouseDown = (items: ItemTypeProps[], startDrag: (item: Children) => voi
   return items;
 };
 
-const SideMenu: FC<PropsWithChildren<SideMenuProps>> = ({onClick: inputOnClick, items, instance, ...rest}) => {
+const SideMenu: FC<PropsWithChildren<SideMenuProps>> = ({onClick: inputOnClick, items, instance, defaultGraphNode, ...rest}) => {
 
   const startDrag = (item: Children) => {
     if(inputOnClick?.(item)){
-      window[instance].dnd.startDrag({
-        type: 'rect-node',
-        properties: {
-          name: '6',
-          status: 'init',
-          svgs: { init: appInit }
-        },
-      })
+      const { key } = item;
+      const node = defaultGraphNode[key];
+      window[instance].dnd.startDrag(node)
     }
   }
 
